@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>George Sichinga — Data Scientist & Economist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --ink:       #0C1220;
+      --amber:     #E8914A;
+      --amber-dim: #C4713A;
+      --teal:      #2DD4BF;
+      --teal-dim:  #1AA090;
+      --cream:     #F7F4EF;
+      --mist:      #EAE6DE;
+      --border:    #D5CFC4;
+      --mid:       #7A7468;
+      --white:     #FFFFFF;
+      --hero-grid: rgba(255,255,255,0.055);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      font-family: 'DM Mono', 'Courier New', monospace;
+      color: var(--ink);
+      font-size: 13px;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 52px;
+      background: rgba(12,18,32,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+    .nav-socials { display: flex; gap: 2px; }
+    .nav-socials a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .nav-socials a:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 52px;
+    }
+
+    /* grid texture */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--hero-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--hero-grid) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+
+    /* ambient glow */
+    .hero-glow-amber {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,145,74,0.18) 0%, transparent 70%);
+      top: -10%; left: -10%;
+      pointer-events: none;
+      animation: driftA 12s ease-in-out infinite alternate;
+    }
+    .hero-glow-teal {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(45,212,191,0.12) 0%, transparent 70%);
+      bottom: 5%; right: 0%;
+      pointer-events: none;
+      animation: driftB 15s ease-in-out infinite alternate;
+    }
+    @keyframes driftA { from { transform: translate(0,0); } to { transform: translate(80px,60px); } }
+    @keyframes driftB { from { transform: translate(0,0); } to { transform: translate(-60px,-40px); } }
+
+    /* big type */
+    .hero-type {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding: 0 20px;
+    }
+    .hero-name-first {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(72px, 13vw, 190px);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-transform: uppercase;
+      position: relative;
+      align-self: flex-start;
+      padding-left: 8vw;
+    }
+    .hero-name-first .stroke {
+      -webkit-text-stroke: 2px var(--amber);
+      color: transparent;
+    }
+    .hero-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      align-self: center;
+      margin: 4px 0;
+    }
+    .hero-tag {
+      background: var(--amber);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 2px;
+    }
+    .hero-tag.outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .hero-tag.teal {
+      background: var(--teal);
+      color: var(--ink);
+    }
+    .hero-name-last {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(72px, 13vw, 190px);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-transform: uppercase;
+      align-self: flex-end;
+      padding-right: 8vw;
+    }
+
+    /* subtitle */
+    .hero-sub {
+      position: relative; z-index: 10;
+      margin-top: 52px;
+      color: rgba(255,255,255,0.38);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* floating cards */
+    .hero-card {
+      position: absolute;
+      z-index: 20;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 18px 22px;
+      min-width: 200px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+    .hero-card:hover {
+      transform: translateY(-6px) rotate(0deg) !important;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      border-color: rgba(232,145,74,0.4);
+    }
+    .card-label {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 17px;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .card-meta {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.04em;
+    }
+    .card-badge {
+      display: inline-block;
+      background: rgba(45,212,191,0.15);
+      border: 1px solid rgba(45,212,191,0.3);
+      color: var(--teal);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+
+    .card-left {
+      left: 4%;
+      bottom: 18%;
+      transform: rotate(-6deg);
+      animation: floatA 7s ease-in-out infinite;
+    }
+    .card-right {
+      right: 4%;
+      top: 18%;
+      transform: rotate(5deg);
+      animation: floatB 9s ease-in-out infinite;
+    }
+    @keyframes floatA {
+      0%,100% { transform: translateY(0) rotate(-6deg); }
+      50%      { transform: translateY(-18px) rotate(-6deg); }
+    }
+    @keyframes floatB {
+      0%,100% { transform: translateY(0) rotate(5deg); }
+      50%      { transform: translateY(-22px) rotate(5deg); }
+    }
+
+    /* spinning badge */
+    .spin-badge {
+      position: absolute;
+      bottom: 10%;
+      right: 2%;
+      z-index: 25;
+      width: 110px; height: 110px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .spin-badge:hover { transform: scale(1.08); }
+    .spin-badge svg.ring { animation: spin 12s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-badge .arrow-icon {
+      position: absolute;
+      width: 28px; height: 28px;
+      stroke: var(--ink);
+    }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.25);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .scroll-hint .line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ─── SECTION STRIP (between hero & content) ─── */
+    .ticker-strip {
+      background: var(--amber);
+      color: var(--ink);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-inner span { margin: 0 28px; }
+    .ticker-inner .dot { color: var(--ink); opacity: 0.45; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── CONTENT SECTIONS ─── */
+    .section {
+      position: relative;
+      background: var(--cream);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 28px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .section-label .num {
+      font-size: 10px;
+      color: var(--amber);
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+    .section-label .title {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .section-label .rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── SHEET TABLE ─── */
+    .sheet-wrap { overflow-x: auto; }
+    .sheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+    }
+    .sheet-table thead th {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: left;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .sheet-table tbody tr { border-bottom: 1px solid var(--mist); }
+    .sheet-table tbody tr:nth-child(even) { background: #FAFAF8; }
+    .sheet-table tbody tr:hover { background: #F0EDE7; }
+    .sheet-table td {
+      padding: 12px 18px;
+      vertical-align: top;
+      line-height: 1.6;
+      font-size: 12px;
+      color: var(--ink);
+      border-right: 1px solid var(--mist);
+    }
+    .row-num {
+      width: 36px;
+      text-align: center;
+      color: rgba(12,18,32,0.25);
+      font-size: 10px;
+      background: var(--mist) !important;
+      border-right: 2px solid var(--border) !important;
+      user-select: none;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 10px;
+      padding: 2px 7px;
+      margin: 2px 2px 2px 0;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+    .tag.amber { background: var(--amber); color: var(--ink); }
+    .tag.teal  { background: var(--teal);  color: var(--ink); }
+    .no-link { color: rgba(12,18,32,0.3); font-size: 11px; font-style: italic; }
+
+    a.gh-link {
+      color: var(--amber-dim);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+    a.gh-link:hover { text-decoration: underline; }
+
+    /* ─── SKILLS GRID ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      background: var(--white);
+    }
+    .skill-cell {
+      border: 1px solid var(--mist);
+      padding: 16px 20px;
+      transition: background 0.2s;
+    }
+    .skill-cell:hover { background: #F5F2EC; }
+    .skill-cell-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--amber-dim);
+      margin-bottom: 8px;
+    }
+    .skill-cell-value { font-size: 12px; line-height: 1.7; color: var(--ink); }
+
+    /* ─── ACCENT BAR ─── */
+    .accent-bar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      padding: 10px 28px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+    }
+    .accent-bar a { color: var(--teal); text-decoration: none; }
+    .accent-bar strong { color: var(--white); font-weight: 500; }
+
+    /* ─── CONFERENCE CARD ─── */
+    .conf-card {
+      background: var(--ink);
+      color: var(--white);
+      padding: 24px 28px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .conf-year {
+      font-family: 'Syne', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--amber);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .conf-body { flex: 1; }
+    .conf-badge {
+      display: inline-block;
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .conf-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .conf-meta { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+    /* ─── REFERENCES ─── */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      background: var(--white);
+    }
+    .ref-cell {
+      border: 1px solid var(--mist);
+      padding: 20px 24px;
+      transition: background 0.2s;
+    }
+    .ref-cell:hover { background: #F5F2EC; }
+    .ref-type {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 6px;
+    }
+    .ref-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .ref-org { font-size: 11px; color: var(--mid); line-height: 1.5; margin-bottom: 8px; }
+    .ref-contact { font-size: 12px; line-height: 1.9; color: var(--ink); }
+    .ref-contact a { color: var(--amber-dim); text-decoration: none; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      padding: 40px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-left {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .footer-left span { color: var(--amber); }
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .footer-links a:hover { color: var(--amber); border-color: var(--amber); }
+    .footer-copy {
+      width: 100%;
+      font-size: 10px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+      margin-top: 8px;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      .hero-name-first, .hero-name-last { font-size: 52px; padding-left: 0; padding-right: 0; align-self: center; }
+      .hero-tag-row { flex-wrap: wrap; justify-content: center; }
+      .card-left, .card-right, .spin-badge { display: none; }
+      nav .nav-links { display: none; }
+      .conf-card { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-logo">GS<span>.</span></div>
+    <div class="nav-links">
+      <a href="#background">Background</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#references">References</a>
+    </div>
+    <div class="nav-socials">
+      <a href="https://www.linkedin.com/in/george-sichinga-871362256" target="_blank">LinkedIn</a>
+      <a href="https://github.com/GeorgeSichinga" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-glow-amber"></div>
+    <div class="hero-glow-teal"></div>
+
+    <!-- floating card left: thesis -->
+    <div class="hero-card card-left">
+      <div class="card-label">MSc Thesis · 2025</div>
+      <div class="card-title">PM2.5 Air Pollution Forecasting, Lilongwe</div>
+      <div class="card-meta">Random Forest · LSTM · Satellite AOD</div>
+      <div class="card-badge">World Bank Scholar</div>
+    </div>
+
+    <!-- floating card right: HPC -->
+    <div class="hero-card card-right">
+      <div class="card-label">Conference · MAREN-LUANAR 2025</div>
+      <div class="card-title">CNN Tomato Disease Detection</div>
+      <div class="card-meta">Training time: 3 days → under 2 hrs</div>
+      <div class="card-badge">HPC Infrastructure</div>
+    </div>
+
+    <!-- big typography -->
+    <div class="hero-type">
+      <div class="hero-name-first">GEORGE</div>
+      <div class="hero-tag-row">
+        <span class="hero-tag">Data Scientist</span>
+        <span class="hero-tag outline">Lilongwe, Malawi</span>
+        <span class="hero-tag teal">Economist</span>
+      </div>
+      <div class="hero-name-last"><span class="stroke">SICHINGA</span></div>
+    </div>
+
+    <div class="hero-sub">MSc Applied Data Science · LUANAR · World Bank Group Scholar</div>
+
+    <!-- spinning badge -->
+    <div class="spin-badge" onclick="document.getElementById('background').scrollIntoView({behavior:'smooth'})">
+      <svg class="ring" viewBox="0 0 100 100" width="110" height="110" fill="none">
+        <path id="sbPath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none"/>
+        <text font-family="'DM Mono', monospace" font-size="9.5" font-weight="500" letter-spacing="3.5" fill="#0C1220">
+          <textPath href="#sbPath" startOffset="0%">EXPLORE PORTFOLIO • EXPLORE PORTFOLIO •&nbsp;</textPath>
+        </text>
+      </svg>
+      <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+      </svg>
+    </div>
+
+    <div class="scroll-hint">
+      <div>Scroll</div>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-inner">
+      <span>Machine Learning</span><span class="dot">✦</span>
+      <span>Climate Modelling</span><span class="dot">✦</span>
+      <span>Agricultural Economics</span><span class="dot">✦</span>
+      <span>Satellite Data</span><span class="dot">✦</span>
+      <span>SHAP Explainability</span><span class="dot">✦</span>
+      <span>Random Forest</span><span class="dot">✦</span>
+      <span>Python · R · Stata</span><span class="dot">✦</span>
+      <span>HPC Computing</span><span class="dot">✦</span>
+      <span>Survey Design</span><span class="dot">✦</span>
+      <span>Development Economics</span><span class="dot">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span>Machine Learning</span><span class="dot">✦</span>
+      <span>Climate Modelling</span><span class="dot">✦</span>
+      <span>Agricultural Economics</span><span class="dot">✦</span>
+      <span>Satellite Data</span><span class="dot">✦</span>
+      <span>SHAP Explainability</span><span class="dot">✦</span>
+      <span>Random Forest</span><span class="dot">✦</span>
+      <span>Python · R · Stata</span><span class="dot">✦</span>
+      <span>HPC Computing</span><span class="dot">✦</span>
+      <span>Survey Design</span><span class="dot">✦</span>
+      <span>Development Economics</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ══ BACKGROUND ══ -->
+  <div class="section" id="background">
+
+    <div class="section-label reveal">
+      <span class="num">01</span>
+      <span class="title">Background</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="sheet-wrap reveal">
+      <table class="sheet-table">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th>Institution</th>
+            <th>Period</th>
+            <th>Degree / Qualification</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-num">1</td>
+            <td>Lilongwe University of Agriculture and Natural Resources (LUANAR)</td>
+            <td>2024 – Present</td>
+            <td><strong>MSc Applied Data Science</strong><br/><em style="font-size:11px;opacity:0.7">(Environment and Climate Modelling)</em></td>
+            <td><span class="tag teal">Ongoing</span>&nbsp; APA · World Bank Group Scholarship</td>
+          </tr>
+          <tr>
+            <td class="row-num">2</td>
+            <td>Lilongwe University of Agriculture and Natural Resources (LUANAR)</td>
+            <td>2020 – 2024</td>
+            <td><strong>BSc Agricultural and Applied Economics</strong></td>
+            <td>Graduated with Credit &nbsp;·&nbsp; GPA: 3.44 / 4.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="accent-bar reveal">
+      <strong>Certifications →</strong>&nbsp;
+      Machine Learning Fundamentals (2024) &nbsp;·&nbsp;
+      Data Science &amp; Applied Data Science Fundamentals (2024) &nbsp;·&nbsp;
+      Aspire Leadership Programme (2024)
+    </div>
+
+    <div class="skills-grid reveal">
+      <div class="skill-cell">
+        <div class="skill-cell-label">Programming Languages</div>
+        <div class="skill-cell-value">
+          <span class="tag amber">Python</span><span class="tag amber">R</span>
+          <span class="tag">SQL</span><span class="tag">C++</span><span class="tag">PHP</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">ML / Data Science</div>
+        <div class="skill-cell-value">
+          <span class="tag amber">Scikit-learn</span><span class="tag amber">TensorFlow</span>
+          <span class="tag">Pandas</span><span class="tag">NumPy</span>
+          <span class="tag teal">SHAP</span><span class="tag">Geopandas</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Data Tools</div>
+        <div class="skill-cell-value">
+          <span class="tag">Power BI</span><span class="tag">STATA</span>
+          <span class="tag">RStudio</span><span class="tag">Excel</span><span class="tag">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Web / Backend</div>
+        <div class="skill-cell-value">
+          <span class="tag">NestJS</span><span class="tag">Next.js</span>
+          <span class="tag">MySQL</span><span class="tag">PHP / USSD API</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Research Methods</div>
+        <div class="skill-cell-value">Survey Design · Statistical Analysis · Geospatial Analysis · Remote Sensing · ML Modelling</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Other Technical</div>
+        <div class="skill-cell-value">HPC (MAREN) · GitHub / Version Control · Report Writing · Stakeholder Engagement</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Languages</div>
+        <div class="skill-cell-value">English (Proficient) &nbsp;|&nbsp; Chichewa (Native) &nbsp;|&nbsp; Chitumbuka (Native)</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-label">Training &amp; Facilitation</div>
+        <div class="skill-cell-value">
+          R Training Facilitator — RUsersMalawi Consortium<br/>
+          Python Training Facilitator — LUANAR
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PROJECTS ══ -->
+  <div class="section" id="projects">
+
+    <div class="section-label reveal">
+      <span class="num">02</span>
+      <span class="title">Projects</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="sheet-wrap reveal">
+      <table class="sheet-table">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th>Project</th>
+            <th>Period</th>
+            <th>Stack</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-num">1</td>
+            <td>
+              <strong>PM2.5 Air Pollution Forecasting, Lilongwe</strong>
+              <br/><span style="font-size:11px;opacity:0.65">MSc Thesis. ML-based urban air quality forecasting using satellite AOD and ground-level meteorological data. SHAP for interpretability.</span>
+            </td>
+            <td>2025 – Present</td>
+            <td><span class="tag amber">Python</span><span class="tag amber">TensorFlow</span><span class="tag">Geopandas</span><span class="tag teal">Random Forest</span><span class="tag teal">LSTM</span><span class="tag">SHAP</span></td>
+            <td><span class="no-link">repo coming soon</span></td>
+          </tr>
+          <tr>
+            <td class="row-num">2</td>
+            <td>
+              <strong>Tomato Leaf Disease Detection (CNN)</strong>
+              <br/><span style="font-size:11px;opacity:0.65">Co-developed CNN model for tomato leaf disease classification. Training time cut from 3 days → &lt;2 hrs via HPC. Presented at MAREN-LUANAR 2025.</span>
+            </td>
+            <td>2024 – 2025</td>
+            <td><span class="tag amber">Python</span><span class="tag amber">TensorFlow</span><span class="tag">CNN</span><span class="tag">HPC</span></td>
+            <td><span class="no-link">repo coming soon</span></td>
+          </tr>
+          <tr>
+            <td class="row-num">3</td>
+            <td>
+              <strong>USSD Market Linkage Platform — Smallholder Legume Farmers</strong>
+              <br/><span style="font-size:11px;opacity:0.65">USSD platform connecting smallholder legume farmers to formal markets in Malawi. Final development phase.</span>
+            </td>
+            <td>2024 – 2025</td>
+            <td><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">USSD API</span></td>
+            <td><span class="no-link">repo coming soon</span></td>
+          </tr>
+          <tr>
+            <td class="row-num">4</td>
+            <td>
+              <strong>Malawi News Analytics Pipeline &amp; Sentiment Dashboard</strong>
+              <br/><span style="font-size:11px;opacity:0.65">End-to-end NLP pipeline scraping Times.mw. Sentiment insights via interactive Streamlit dashboard.</span>
+            </td>
+            <td>2024</td>
+            <td><span class="tag amber">Python</span><span class="tag">Streamlit</span><span class="tag">BeautifulSoup</span><span class="tag teal">NLP</span></td>
+            <td><a class="gh-link" href="https://github.com/GeorgeSichinga/Sentiment-Analysis-using-Times-Mw-data" target="_blank">GitHub →</a></td>
+          </tr>
+          <tr>
+            <td class="row-num">5</td>
+            <td>
+              <strong>Student Records Management System</strong>
+              <br/><span style="font-size:11px;opacity:0.65">Full-stack student records system.</span>
+            </td>
+            <td>2024</td>
+            <td><span class="tag">NestJS</span><span class="tag">Next.js</span><span class="tag">MySQL</span></td>
+            <td><a class="gh-link" href="https://github.com/GeorgeSichinga/Student-Registry" target="_blank">GitHub →</a></td>
+          </tr>
+          <tr>
+            <td class="row-num">6</td>
+            <td>
+              <strong>Machine Learning in R — RUsersMalawi Workshop</strong>
+              <br/><span style="font-size:11px;opacity:0.65">Workshop materials and code for ML in R, developed and delivered for RUsersMalawi Consortium.</span>
+            </td>
+            <td>2024</td>
+            <td><span class="tag amber">R</span><span class="tag">Tidyverse</span><span class="tag">Caret</span></td>
+            <td><a class="gh-link" href="https://github.com/GeorgeSichinga/Machine-Learning-in-R-RusersMw-workshop" target="_blank">GitHub →</a></td>
+          </tr>
+          <tr>
+            <td class="row-num">7</td>
+            <td>
+              <strong>Data Mining Using A Priori Algorithm — Movie Rentals</strong>
+              <br/><span style="font-size:11px;opacity:0.65">Association rule mining applied to movie rental data.</span>
+            </td>
+            <td>2024</td>
+            <td><span class="tag amber">R</span><span class="tag">Arules</span><span class="tag teal">Data Mining</span></td>
+            <td><a class="gh-link" href="https://github.com/GeorgeSichinga/-Data-Mining-Using-A-Priori-Algorithm-for-Movie-rentals" target="_blank">GitHub →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ EXPERIENCE ══ -->
+  <div class="section" id="experience">
+
+    <div class="section-label reveal">
+      <span class="num">03</span>
+      <span class="title">Experience</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="sheet-wrap reveal">
+      <table class="sheet-table">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th>Period</th>
+            <th>Organisation</th>
+            <th>Position</th>
+            <th>Key Responsibilities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-num">1</td>
+            <td style="white-space:nowrap">Sep – Oct 2025</td>
+            <td>MAR Phiri and Associates</td>
+            <td><strong>Research Assistant</strong></td>
+            <td>Collected, compiled and validated household and farm-level data for the AGRA Value Chain Survey. Programmed and validated Survey Solutions questionnaires and checklists. Preliminary data analysis using STATA. Report writing.</td>
+          </tr>
+          <tr>
+            <td class="row-num">2</td>
+            <td style="white-space:nowrap">Oct – Nov 2024</td>
+            <td>Centre for Agricultural Research and Development (CARD), LUANAR</td>
+            <td><strong>Field Supervisor</strong></td>
+            <td>Supervised enumerators across multiple field sites. Managed data quality assurance, training, and performance feedback. Ensured timely and accurate delivery of survey data.</td>
+          </tr>
+          <tr>
+            <td class="row-num">3</td>
+            <td>2023</td>
+            <td>SDE Consulting Malawi</td>
+            <td><strong>M&amp;E Intern</strong></td>
+            <td>Collected and analysed economic and operational data for performance tracking. Assisted in writing proposals, EOIs, and inception reports. Supported data collection in agricultural development projects across Malawi. Conducted farmer and stakeholder interviews. Compiled research findings.</td>
+          </tr>
+          <tr>
+            <td class="row-num">4</td>
+            <td>2022 – Present</td>
+            <td>EmpowerBros</td>
+            <td><strong>Content &amp; Outreach Specialist</strong></td>
+            <td>Managed social media content to promote urban youth programmes across Lilongwe. Coordinated community workshops with local influencers. Analysed performance metrics to refine engagement strategy.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- conference card -->
+    <div class="conf-card reveal">
+      <div class="conf-year">2025</div>
+      <div class="conf-body">
+        <div class="conf-badge">Conference Presentation</div>
+        <div class="conf-title">Sichinga, G. &amp; Jeremiah, B. — Deep Learning in Agriculture: Tomato Leaf Disease Detection Using Convolutional Neural Network (CNN)</div>
+        <div class="conf-meta">MAREN-LUANAR High Performance Computing Partnership Event &nbsp;·&nbsp; Lilongwe, April 23 2025 &nbsp;·&nbsp; Training time reduced from 3 days to &lt;2 hours on HPC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ REFERENCES ══ -->
+  <div class="section" id="references">
+
+    <div class="section-label reveal">
+      <span class="num">04</span>
+      <span class="title">References</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="ref-grid reveal">
+      <div class="ref-cell">
+        <div class="ref-type">Academic Reference</div>
+        <div class="ref-name">Mr James Kambere</div>
+        <div class="ref-org">Lilongwe University of Agriculture and Natural Resources (LUANAR)</div>
+        <div class="ref-contact">
+          +265 888 971 47<br/>
+          <a href="mailto:jkambere@luanar.ac.mw">jkambere@luanar.ac.mw</a>
+        </div>
+      </div>
+      <div class="ref-cell">
+        <div class="ref-type">Academic Reference</div>
+        <div class="ref-name">Dr Ruth Magreta</div>
+        <div class="ref-org">Lilongwe University of Agriculture and Natural Resources (LUANAR)</div>
+        <div class="ref-contact">
+          +265 999 287 544<br/>
+          <a href="mailto:rumagreta@yahoo.co.uk">rumagreta@yahoo.co.uk</a>
+        </div>
+      </div>
+      <div class="ref-cell">
+        <div class="ref-type">Professional Reference</div>
+        <div class="ref-name">Mr C.H. Kayira</div>
+        <div class="ref-org">Managing Partner, SDE Consulting Malawi<br/><em style="font-size:10px;opacity:0.7">MSc IWRM, BSc IE</em></div>
+        <div class="ref-contact">
+          +265 996 618 222<br/>
+          <a href="mailto:chawanangwak@sdemalawi.com">chawanangwak@sdemalawi.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-left">George <span>Sichinga</span></div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/george-sichinga-871362256" target="_blank">LinkedIn</a>
+      <a href="https://github.com/GeorgeSichinga" target="_blank">GitHub</a>
+      <a href="mailto:georgesichinga31@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">Applied Data Scientist · Agricultural Economist · LUANAR, Malawi · georgesichinga31@gmail.com · +265 997 079 810</div>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Nav active link ──
+    const sections = document.querySelectorAll('.section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--amber)'
+          : 'rgba(255,255,255,0.55)';
+      });
+    });
+
+    // ── Parallax glows ──
+    window.addEventListener('mousemove', (e) => {
+      const hero = document.getElementById('hero');
+      if (!hero) return;
+      const rect = hero.getBoundingClientRect();
+      if (e.clientY > rect.bottom) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      document.querySelector('.hero-glow-amber').style.transform = `translate(${x}px, ${y}px)`;
+      document.querySelector('.hero-glow-teal').style.transform   = `translate(${-x}px, ${-y}px)`;
+    });
+  </script>
+</body>
+</html>
