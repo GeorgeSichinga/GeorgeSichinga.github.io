@@ -240,6 +240,25 @@
     .accent-bar { background:var(--ink); color:rgba(255,255,255,0.5); padding:10px 24px; font-size:11px; letter-spacing:0.07em; line-height:1.8; }
     .accent-bar strong { color:var(--white); font-weight:500; }
 
+    /* ── LANGUAGE SUMMARY ── */
+    .lang-summary { background:var(--white); border-top:1px solid var(--mist); padding:20px 24px 24px; }
+    .lang-summary-heading { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber-dim); margin-bottom:16px; }
+    .lang-bars { display:flex; flex-direction:column; gap:10px; }
+    .lang-bar-row { display:grid; grid-template-columns:130px 1fr 56px; align-items:center; gap:12px; }
+    .lang-bar-name { display:flex; align-items:center; gap:6px; font-size:11px; letter-spacing:0.04em; color:var(--ink); white-space:nowrap; }
+    .lang-bar-name img { width:14px; height:14px; flex-shrink:0; }
+    .lang-bar-track { height:6px; background:var(--mist); border-radius:3px; overflow:hidden; }
+    .lang-bar-fill { height:100%; border-radius:3px; transition:width 0.8s ease; }
+    .lang-bar-fill.py  { background:var(--amber); }
+    .lang-bar-fill.r   { background:var(--teal); }
+    .lang-bar-fill.sql { background:#7C9CBF; }
+    .lang-bar-fill.php { background:#8892BF; }
+    .lang-bar-fill.js  { background:#F0DB4F; }
+    .lang-bar-meta { font-size:10px; color:var(--mid); text-align:right; white-space:nowrap; }
+    @media (max-width:480px) {
+      .lang-bar-row { grid-template-columns:110px 1fr 46px; gap:8px; }
+    }
+
     /* conference */
     .conf-card { background:var(--ink); color:var(--white); padding:24px; display:flex; gap:24px; align-items:flex-start; border-top:1px solid rgba(255,255,255,0.05); }
     .conf-year { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--amber); line-height:1; white-space:nowrap; }
@@ -695,6 +714,36 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="lang-summary reveal">
+    <div class="lang-summary-heading">Languages Used Across Projects</div>
+    <div class="lang-bars">
+      <div class="lang-bar-row">
+        <div class="lang-bar-name"><img src="https://cdn.simpleicons.org/python/0C1220" alt="Python logo"/>Python</div>
+        <div class="lang-bar-track"><div class="lang-bar-fill py" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Python: 3 projects"></div></div>
+        <div class="lang-bar-meta">3 projects</div>
+      </div>
+      <div class="lang-bar-row">
+        <div class="lang-bar-name"><img src="https://cdn.simpleicons.org/r/2DD4BF" alt="R logo"/>R</div>
+        <div class="lang-bar-track"><div class="lang-bar-fill r" style="width:67%" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" aria-label="R: 2 projects"></div></div>
+        <div class="lang-bar-meta">2 projects</div>
+      </div>
+      <div class="lang-bar-row">
+        <div class="lang-bar-name"><img src="https://cdn.simpleicons.org/mysql/7C9CBF" alt="MySQL logo"/>SQL (MySQL)</div>
+        <div class="lang-bar-track"><div class="lang-bar-fill sql" style="width:67%" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" aria-label="SQL (MySQL): 2 projects"></div></div>
+        <div class="lang-bar-meta">2 projects</div>
+      </div>
+      <div class="lang-bar-row">
+        <div class="lang-bar-name"><img src="https://cdn.simpleicons.org/php/8892BF" alt="PHP logo"/>PHP</div>
+        <div class="lang-bar-track"><div class="lang-bar-fill php" style="width:33%" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="PHP: 1 project"></div></div>
+        <div class="lang-bar-meta">1 project</div>
+      </div>
+      <div class="lang-bar-row">
+        <div class="lang-bar-name"><img src="https://cdn.simpleicons.org/javascript/F0DB4F" alt="JavaScript logo"/>JavaScript</div>
+        <div class="lang-bar-track"><div class="lang-bar-fill js" style="width:33%" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="JavaScript: 1 project"></div></div>
+        <div class="lang-bar-meta">1 project</div>
+      </div>
+    </div>
   </div>
 </div>
 
